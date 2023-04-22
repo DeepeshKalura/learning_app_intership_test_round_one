@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widget/bottom_navigation_bar_widget.dart';
 import 'widget/button_widget.dart';
 import 'widget/container_widget.dart';
 
@@ -370,6 +371,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: const BottomNavigationBarWidget(),
       ),
     );
   }
