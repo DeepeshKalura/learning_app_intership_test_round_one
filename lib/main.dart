@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './view/widget/bottom_navigation_bar_widget.dart';
+import './view/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: BottomNavigationBarScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
