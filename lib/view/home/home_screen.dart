@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../controller/get_call_controller.dart';
+import '../../model/lesson_model.dart';
+import '../../model/program_model.dart';
 import '../widget/bottom_navigation_bar_widget.dart';
 import 'widget/button_widget.dart';
 import 'widget/container_widget.dart';
+import 'widget/view_all_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GetCallController getCallController = GetCallController();
+  ProgramModel? programModel;
+  LessonModel? lessonModel;
+
+  @override
+  void initState() {
+    super.initState();
+    getIntialData();
+  }
+
+  void getIntialData() async {
+    programModel = await getCallController.getProgram();
+    lessonModel = await getCallController.getLessons();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,29 +165,40 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: -1,
                       ),
                     ),
-                    RichText(
-                      text: const TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'View all ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(109, 116, 122, 1),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Inter',
-                              letterSpacing: -0.1,
-                            ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewAllWidget(
+                                isProgram: true, programModel: programModel),
                           ),
-                          WidgetSpan(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Color.fromRGBO(109, 116, 122, 1),
-                              size: 12,
+                        );
+                      },
+                      child: RichText(
+                        text: const TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'View all ',
+                              style: TextStyle(
+                                color: Color.fromRGBO(109, 116, 122, 1),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Inter',
+                                letterSpacing: -0.1,
+                              ),
                             ),
-                            baseline: TextBaseline.alphabetic,
-                            alignment: PlaceholderAlignment.middle,
-                          ),
-                        ],
+                            WidgetSpan(
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: Color.fromRGBO(109, 116, 122, 1),
+                                size: 12,
+                              ),
+                              baseline: TextBaseline.alphabetic,
+                              alignment: PlaceholderAlignment.middle,
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -299,29 +334,42 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: -1,
                       ),
                     ),
-                    RichText(
-                      text: const TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'View all ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(109, 116, 122, 1),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Inter',
-                              letterSpacing: -0.1,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewAllWidget(
+                              isProgram: false,
+                              lessonModel: lessonModel,
                             ),
                           ),
-                          WidgetSpan(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Color.fromRGBO(109, 116, 122, 1),
-                              size: 12,
+                        );
+                      },
+                      child: RichText(
+                        text: const TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'View all ',
+                              style: TextStyle(
+                                color: Color.fromRGBO(109, 116, 122, 1),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Inter',
+                                letterSpacing: -0.1,
+                              ),
                             ),
-                            baseline: TextBaseline.alphabetic,
-                            alignment: PlaceholderAlignment.middle,
-                          ),
-                        ],
+                            WidgetSpan(
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: Color.fromRGBO(109, 116, 122, 1),
+                                size: 12,
+                              ),
+                              baseline: TextBaseline.alphabetic,
+                              alignment: PlaceholderAlignment.middle,
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
