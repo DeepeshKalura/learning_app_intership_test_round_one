@@ -6,15 +6,17 @@ class ButtonWidget extends StatelessWidget {
     super.key,
     required this.path,
     required this.message,
+    this.width = 185.0,
   });
 
   final String path;
   final String message;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 185,
+      width: width,
       height: 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
